@@ -16,7 +16,9 @@ jobs:
 
       - name: Extract ngrok
         run: Expand-Archive ngrok.zip
-
+      - name: Debug NGROK_AUTH
+        run: |
+          echo "NGROK_AUTH: $Env:NGROK_AUTH"
       - name: Connect Ngrok.
         run: |
           ./ngrok/ngrok.exe authtoken $Env:NGROK_AUTH
