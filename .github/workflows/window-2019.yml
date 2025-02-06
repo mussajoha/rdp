@@ -23,7 +23,13 @@ jobs:
           ./ngrok/ngrok.exe authtoken $Env:NGROK_AUTH
           echo ${{ secrets.TAKEN }}
           echo $Env:NGROK_AUTH
-          Get-Content "C:\Users\runneradmin\AppData\Local/ngrok/ngrok.yml"
+          if (Test-Path "C:\Users\runneradmin\AppData\Local\ngrok\ngrok.yml") {
+            echo "ngrok.yml file exists. Here's the content:"
+            Get-Content "C:\Users\runneradmin\AppData\Local\ngrok\ngrok.yml" -Raw
+            echo "File size: $(Get-Item 'C:\Users\runneradmin\AppData\Local\ngrok\ngrok.yml').length bytes"
+          } else {
+            echo "ngrok.yml file not found."
+          }
         env:
           NGROK_AUTH: ${{ secrets.TAKEN }}
       - name: Windows10 RDP.
