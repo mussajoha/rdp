@@ -36,6 +36,8 @@ jobs:
 
       - name: Connect Rdp.
         run: cmd /c start.bat
-
+      - name: List files for debugging.
+        run: |
+          dir
       - name: win10 RDP.
         run: cmd /c loop.bat
